@@ -1,0 +1,77 @@
+.career-path {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.career-stage {
+    background: white;
+    border: 2px solid var(--border-color);
+    border-left: 5px solid var(--purple);
+    border-radius: var(--radius-md);
+    padding: 32px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.career-stage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--lime), var(--purple), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.career-stage:hover {
+    box-shadow: 16px 8px 24px rgba(139, 92, 246, 0.12);
+    transform: translateX(4px) translateY(-2px);
+}
+
+.career-stage:hover::before {
+    opacity: 1;
+}
+
+.career-stage-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 16px;
+}
+
+.career-stage-number {
+    width: 48px;
+    height: 48px;
+    background: var(--purple-light);
+    color: var(--purple);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.career-stage-info h3 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+.career-salary {
+    font-weight: 800;
+    color: var(--lime);
+    font-size: 1.1rem;
+}
+
+.career-description {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}

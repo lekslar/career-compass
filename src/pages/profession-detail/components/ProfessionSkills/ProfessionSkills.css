@@ -1,0 +1,100 @@
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.skill-card {
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    transform: rotate(-1deg);
+    animation: floatUp 0.6s ease-out;
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 40px;
+    height: 40px;
+    background: var(--lime-light);
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.skill-card:nth-child(2n)::before {
+    background: var(--blue-light);
+    left: -2px;
+    right: auto;
+}
+
+.skill-card:nth-child(3n)::before {
+    background: var(--pink-light);
+}
+
+.skill-card:hover {
+    border-color: var(--purple);
+    box-shadow: 12px 12px 0 rgba(139, 92, 246, 0.15);
+    transform: rotate(0deg) translateY(-8px);
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.skill-header h4 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.skill-level {
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+}
+
+.skill-level.essential {
+    background: var(--lime-light);
+    color: var(--lime);
+}
+
+.skill-level.important {
+    background: var(--blue-light);
+    color: #0284C7;
+}
+
+@keyframes floatUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.skill-card:nth-child(1) { animation-delay: 0.1s; }
+.skill-card:nth-child(2) { animation-delay: 0.2s; }
+.skill-card:nth-child(3) { animation-delay: 0.3s; }
+.skill-card:nth-child(4) { animation-delay: 0.4s; }
+.skill-card:nth-child(5) { animation-delay: 0.5s; }
+.skill-card:nth-child(6) { animation-delay: 0.6s; }
+
+@media (max-width: 1024px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
