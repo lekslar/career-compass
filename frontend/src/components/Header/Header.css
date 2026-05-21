@@ -1,0 +1,90 @@
+/* HEADER STYLE */
+.header {
+    background-color: #FFFFFF;
+    border-bottom: 4px solid var(--text-main);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.logo-img {
+    height: 68px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    transition: var(--transition);
+}
+
+.logo:hover .logo-img {
+    transform: scale(1.05);
+}
+
+.logo-text h1 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--purple);
+    letter-spacing: -0.02em;
+}
+
+.logo-text span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 5px;
+    bottom: -6px;
+    left: 0;
+    background-color: var(--purple);
+    transition: var(--transition);
+    border-radius: var(--radius-full);
+    transform: rotate(-1deg);
+}
+
+.nav-links a:hover {
+    color: var(--purple);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.auth-btn {
+    display: block;
+}

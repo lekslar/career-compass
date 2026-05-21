@@ -1,0 +1,32 @@
+{
+  "name": "career-compass",
+  "version": "1.0.0",
+  "description": "Приложение, которое помогает выбрать ИТ-профессию и построить план действий на 12 месяцев. \r <br>",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lekslar/career-compass.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lekslar/career-compass/issues"
+  },
+  "homepage": "https://github.com/lekslar/career-compass#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.106.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

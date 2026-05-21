@@ -1,0 +1,477 @@
+/* ROADMAP PAGE */
+.roadmap-page-container {
+  padding-bottom: 120px;
+}
+
+.roadmap-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 60px;
+  margin-top: 24px;
+}
+
+.roadmap-title-area {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.roadmap-header-icon {
+  background: white;
+  border: 3px solid var(--text-main);
+  border-radius: var(--radius-md);
+  padding: 8px;
+  color: var(--purple);
+  width: 72px !important;
+  height: 72px !important;
+  box-shadow: 6px 6px 0 var(--border-color);
+  transform: rotate(-4deg);
+  flex-shrink: 0;
+}
+
+.roadmap-title-area h1 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.roadmap-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* КАРТОЧКА ПРОГРЕССА */
+.roadmap-progress-card {
+  background: white;
+  border: 3px solid var(--text-main);
+  border-radius: var(--radius-lg);
+  padding: 24px 32px;
+  box-shadow: 8px 8px 0 var(--border-color);
+  transform: rotate(0.5deg);
+}
+
+.progress-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  border-bottom: 2px dashed var(--border-color);
+  padding-bottom: 16px;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--purple);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+
+.progress-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.progress-bar-label {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.progress-bar-container {
+  height: 16px;
+  background: var(--border-color);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  border: 2px solid var(--text-main);
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--lime);
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ДЕРЕВО / СЕТКА ТЕМ */
+.roadmap-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.roadmap-category-section {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Соединительная линия между разделами */
+.roadmap-connector-line {
+  width: 4px;
+  height: 48px;
+  background: repeating-linear-gradient(to bottom, var(--text-main), var(--text-main) 8px, transparent 8px, transparent 16px);
+}
+
+.roadmap-category-card {
+  width: 100%;
+  background: white;
+  border: 3px solid var(--text-main);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: 10px 10px 0 var(--border-color);
+  transition: var(--transition);
+  position: relative;
+}
+
+.roadmap-category-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Цветовые темы разделов */
+.roadmap-category-card.card-blue {
+  border-color: var(--purple);
+  box-shadow: 10px 10px 0 var(--blue-light);
+}
+.roadmap-category-card.card-blue .category-title {
+  color: var(--purple);
+}
+
+.roadmap-category-card.card-lime {
+  border-color: var(--lime);
+  box-shadow: 10px 10px 0 var(--lime-light);
+}
+.roadmap-category-card.card-lime .category-title {
+  color: var(--lime-hover);
+}
+
+.roadmap-category-card.card-pink {
+  border-color: var(--pink);
+  box-shadow: 10px 10px 0 var(--pink-light);
+}
+.roadmap-category-card.card-pink .category-title {
+  color: var(--pink);
+}
+
+.roadmap-category-card.card-lilac {
+  border-color: #A78BFA;
+  box-shadow: 10px 10px 0 var(--lilac-light);
+}
+.roadmap-category-card.card-lilac .category-title {
+  color: #7C3AED;
+}
+
+.category-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-bottom: 24px;
+}
+
+.roadmap-nodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* КАРТОЧКА ТЕМЫ (НОДА) */
+.roadmap-node-card {
+  background: white;
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: var(--transition);
+  position: relative;
+  user-select: none;
+}
+
+.roadmap-node-card:hover {
+  border-color: var(--text-main);
+  transform: translateY(-2px) rotate(-1deg);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.05);
+}
+
+.node-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+.node-status-indicator {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-empty {
+  width: 14px;
+  height: 14px;
+  border: 2px dashed var(--text-muted);
+  border-radius: 50%;
+}
+
+.icon-completed {
+  color: var(--lime);
+}
+
+.icon-learning {
+  color: #F59E0B; /* Orange */
+}
+
+/* Статусы нод */
+.roadmap-node-card.learning {
+  border-color: #F59E0B;
+  background-color: #FEF3C7; /* Light yellow/orange */
+}
+
+.roadmap-node-card.completed {
+  border-color: var(--lime);
+  background-color: var(--lime-light);
+}
+
+.roadmap-node-card.selected {
+  border-color: var(--purple);
+  box-shadow: 4px 4px 0 var(--purple-light);
+  transform: scale(1.02);
+}
+
+/* ВЫДВИЖНОЙ ДРОУЭР / ПАНЕЛЬ ДЕТАЛЕЙ */
+.roadmap-drawer {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 460px;
+  background: white;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+  border-left: 3px solid var(--text-main);
+  z-index: 1000;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+}
+
+.roadmap-drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-content {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.drawer-badge {
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  border: 2px solid var(--text-main);
+}
+
+.drawer-badge.card-blue { background: var(--blue-light); color: var(--purple); }
+.drawer-badge.card-lime { background: var(--lime-light); color: var(--lime-hover); }
+.drawer-badge.card-pink { background: var(--pink-light); color: var(--pink); }
+.drawer-badge.card-lilac { background: var(--lilac-light); color: #7C3AED; }
+
+.close-btn {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 4px;
+}
+
+.close-btn:hover {
+  color: var(--text-main);
+  transform: rotate(90deg);
+}
+
+.drawer-title {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--text-main);
+  margin-bottom: 32px;
+  line-height: 1.2;
+}
+
+/* Выбор статуса в панели */
+.status-selector-area {
+  margin-bottom: 40px;
+  background: var(--bg-main);
+  padding: 20px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--border-color);
+}
+
+.status-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-main);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.status-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 8px;
+}
+
+.status-btn {
+  padding: 10px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border-color);
+  background: white;
+  transition: var(--transition);
+}
+
+.status-btn:hover {
+  border-color: var(--text-main);
+}
+
+.status-btn.btn-not-started.active {
+  background: #E5E7EB;
+  color: var(--text-muted);
+  border-color: var(--text-muted);
+}
+
+.status-btn.btn-learning.active {
+  background: #FEF3C7;
+  color: #D97706;
+  border-color: #F59E0B;
+}
+
+.status-btn.btn-completed.active {
+  background: var(--lime-light);
+  color: var(--lime-hover);
+  border-color: var(--lime);
+}
+
+/* Тело описания */
+.drawer-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.body-section-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-main);
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 8px;
+}
+
+.drawer-description {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.drawer-resources-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.resource-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 1.05rem;
+  color: var(--purple);
+  font-weight: 700;
+  padding: 12px 16px;
+  background: var(--bg-main);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.resource-link:hover {
+  border-color: var(--purple-light);
+  background: var(--blue-light);
+  transform: translateX(4px);
+}
+
+.ext-icon {
+  margin-left: auto;
+  opacity: 0.5;
+}
+
+.resource-link:hover .ext-icon {
+  opacity: 1;
+}
+
+.no-resources-msg {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* АДАПТИВНОСТЬ */
+@media (max-width: 1024px) {
+  .roadmap-header {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .roadmap-drawer {
+    width: 100%;
+    border-left: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .roadmap-category-card {
+    padding: 24px;
+  }
+
+  .roadmap-title-area h1 {
+    font-size: 1.8rem;
+  }
+}
