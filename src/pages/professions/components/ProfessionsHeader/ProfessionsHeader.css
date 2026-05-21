@@ -1,0 +1,10 @@
+.professions-header {
+    text-align: left;
+    margin-bottom: 80px;
+}
+
+@media (max-width: 1024px) {
+    .professions-header {
+        margin-bottom: 60px;
+    }
+}
