@@ -47,9 +47,9 @@ router.post('/submit', async (req, res) => {
         //     });
 
         // Если база вернула ошибку при записи
-        if (dbError) {
-            console.error("Ошибка записи в Supabase:", dbError.message);
-        }
+        // if (dbError) {
+        //     console.error("Ошибка записи в Supabase:", dbError.message);
+        // }
 
         // 3. Отдаем результат на фронтенд
         res.json({
