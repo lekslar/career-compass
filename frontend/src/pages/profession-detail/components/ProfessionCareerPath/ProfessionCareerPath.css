@@ -6,7 +6,7 @@
 
 .career-stage {
     background: white;
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--border-color);
     border-left: 5px solid var(--purple);
     border-radius: var(--radius-md);
     padding: 32px;
@@ -28,8 +28,8 @@
 }
 
 .career-stage:hover {
-    box-shadow: 16px 8px 24px rgba(139, 92, 246, 0.12);
-    transform: translateX(4px) translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
 }
 
 .career-stage:hover::before {
@@ -52,16 +52,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 900;
-    font-size: 1.4rem;
+    font-weight: 800;
+    font-size: 1.3rem;
     flex-shrink: 0;
 }
 
 .career-stage-info h3 {
     font-size: 1.4rem;
-    font-weight: 900;
+    font-weight: 800;
     margin-bottom: 8px;
     color: var(--text-main);
+    letter-spacing: -0.01em;
 }
 
 .career-salary {

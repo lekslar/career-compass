@@ -8,6 +8,7 @@ import Login from './pages/login/login';
 import Register from './pages/register/register';
 import Dashboard from './pages/dashboard/dashboard';
 import RoadmapPage from './pages/roadmap/roadmap';
+import ChatPage from './pages/chat/chat';
 import './styles/index.css';
 
 function AppContent() {
@@ -39,6 +40,7 @@ function AppContent() {
           <Route path="/register" element={<Register onRegister={handleLogin} />} />
           <Route path="/dashboard" element={<Dashboard user={user} onLogout={handleLogout} />} />
           <Route path="/roadmap/:slug" element={<RoadmapPage />} />
+          <Route path="/chat" element={<ChatPage user={user} />} />
         </Routes>
       </main>
     </>

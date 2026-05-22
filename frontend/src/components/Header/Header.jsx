@@ -20,6 +20,7 @@ function Header({ user }) {
         </div>
         <nav className="nav-links">
           <a href="#" onClick={(e) => { e.preventDefault(); navigate('/professions'); }}>Профессии</a>
+          <a href="#" onClick={(e) => { e.preventDefault(); navigate('/chat'); }}>ИИ-Ассистент</a>
         </nav>
         <div className="auth-btn">
           {user ? (

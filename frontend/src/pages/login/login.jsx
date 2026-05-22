@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Mail, Lock, ArrowRight } from 'lucide-react';
+import './login.css';
 
 function Login({ onLogin }) {
   const navigate = useNavigate();

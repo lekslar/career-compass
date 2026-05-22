@@ -1,12 +1,14 @@
 /* HEADER STYLE */
 .header {
-    background-color: #FFFFFF;
-    border-bottom: 4px solid var(--text-main);
-    padding: 20px 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
 }
 
 .header-inner {
@@ -18,12 +20,13 @@
 .logo {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .logo-img {
-    height: 68px;
+    height: 40px;
     width: auto;
     object-fit: contain;
     display: block;
@@ -31,60 +34,70 @@
 }
 
 .logo:hover .logo-img {
-    transform: scale(1.05);
+    transform: scale(1.04);
 }
 
 .logo-text h1 {
-    font-size: 1.4rem;
-    font-weight: 900;
+    font-size: 1.25rem;
+    font-weight: 800;
     line-height: 1;
     color: var(--purple);
     letter-spacing: -0.02em;
 }
 
 .logo-text span {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
 }
 
 .nav-links {
     display: flex;
-    gap: 32px;
+    gap: 28px;
 }
 
 .nav-links a {
     text-decoration: none;
     color: var(--text-main);
-    font-weight: 700;
-    font-size: 1.1rem;
+    font-weight: 500;
+    font-size: 1rem;
     transition: var(--transition);
     position: relative;
+    padding: 4px 0;
 }
 
 .nav-links a::after {
     content: '';
     position: absolute;
     width: 0;
-    height: 5px;
-    bottom: -6px;
+    height: 2px;
+    bottom: -2px;
     left: 0;
     background-color: var(--purple);
     transition: var(--transition);
     border-radius: var(--radius-full);
-    transform: rotate(-1deg);
 }
 
 .nav-links a:hover {
-    color: var(--purple);
+    color: var(--purple-hover);
 }
 
 .nav-links a:hover::after {
     width: 100%;
 }
 
+.nav-links a.active {
+    color: var(--purple-hover);
+    font-weight: 600;
+}
+
+.nav-links a.active::after {
+    width: 100%;
+}
+
 .auth-btn {
     display: block;
 }
+

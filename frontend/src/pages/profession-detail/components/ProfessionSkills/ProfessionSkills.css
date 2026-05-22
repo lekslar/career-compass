@@ -6,13 +6,12 @@
 
 .skill-card {
     background: white;
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     padding: 28px;
     transition: var(--transition);
     position: relative;
     overflow: hidden;
-    transform: rotate(-1deg);
     animation: floatUp 0.6s ease-out;
 }
 
@@ -40,8 +39,8 @@
 
 .skill-card:hover {
     border-color: var(--purple);
-    box-shadow: 12px 12px 0 rgba(139, 92, 246, 0.15);
-    transform: rotate(0deg) translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
 }
 
 .skill-header {

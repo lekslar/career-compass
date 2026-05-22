@@ -7,6 +7,7 @@ import ProfessionSkills from './components/ProfessionSkills/ProfessionSkills';
 import ProfessionRequirements from './components/ProfessionRequirements/ProfessionRequirements';
 import ProfessionCareerPath from './components/ProfessionCareerPath/ProfessionCareerPath';
 import ProfessionFirstSteps from './components/ProfessionFirstSteps/ProfessionFirstSteps';
+import ProfessionResources from './components/ProfessionResources/ProfessionResources';
 
 function ProfessionDetailPage() {
   const { slug } = useParams();
@@ -42,6 +43,7 @@ function ProfessionDetailPage() {
       <ProfessionRequirements profession={profession} />
       <ProfessionCareerPath profession={profession} />
       <ProfessionFirstSteps profession={profession} />
+      <ProfessionResources profession={profession} />
 
       <div style={{ display: 'flex', justifyContent: 'center', marginTop: '60px' }}>
         <button 

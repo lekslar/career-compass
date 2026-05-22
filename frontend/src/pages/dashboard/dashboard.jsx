@@ -10,6 +10,7 @@ import {
   TrendingUp,
   LogOut
 } from 'lucide-react';
+import './dashboard.css';
 
 const INITIAL_ROADMAP = [
   {
@@ -144,17 +145,34 @@ function Dashboard({ user, onLogout }) {
       setActiveTab(tab);
     }
   }, [location.search]);
-  const [openMonths, setOpenMonths] = useState({ 1: true }); // Первый месяц открыт по умолчанию
-  
-  // Состояние для интерактивного чек-листа
-  // По умолчанию отметим первые 4 задачи как выполненные
-  const [checkedTasks, setCheckedTasks] = useState({
-    '1-0': true,
-    '1-1': true,
-    '1-2': true,
-    '2-0': true,
-    '2-1': true,
+
+  // Загружаем открытые месяцы и отмеченные задачи из localStorage
+  const userKey = user?.email || 'anonymous';
+
+  const [openMonths, setOpenMonths] = useState(() => {
+    const saved = localStorage.getItem(`dashboard_open_months_${userKey}`);
+    return saved ? JSON.parse(saved) : { 1: true };
   });
+  
+  const [checkedTasks, setCheckedTasks] = useState(() => {
+    const saved = localStorage.getItem(`dashboard_checked_tasks_${userKey}`);
+    return saved ? JSON.parse(saved) : {
+      '1-0': true,
+      '1-1': true,
+      '1-2': true,
+      '2-0': true,
+      '2-1': true,
+    };
+  });
+
+  // Сохраняем состояние при изменениях
+  useEffect(() => {
+    localStorage.setItem(`dashboard_open_months_${userKey}`, JSON.stringify(openMonths));
+  }, [openMonths, userKey]);
+
+  useEffect(() => {
+    localStorage.setItem(`dashboard_checked_tasks_${userKey}`, JSON.stringify(checkedTasks));
+  }, [checkedTasks, userKey]);
 
   const toggleMonth = (id) => {
     setOpenMonths(prev => ({

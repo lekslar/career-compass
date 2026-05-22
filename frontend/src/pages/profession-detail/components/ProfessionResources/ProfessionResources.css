@@ -1,30 +1,29 @@
 .resources-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
 }
 
 .resource-block {
-    background: white;
-    border: 2px solid var(--border-color);
+    background: #ffffff;
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    padding: 32px;
-    transition: var(--transition);
+    padding: 24px;
+    transition: all 0.3s ease;
     position: relative;
-    transform: rotate(1.5deg);
-    animation: slideInRotate 0.6s ease-out;
+    box-shadow: 0 4px 15px rgba(2, 6, 23, 0.02);
 }
 
 .resource-block::before {
     content: '';
     position: absolute;
-    top: -8px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
+    top: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
     background: var(--lime-light);
-    border-radius: 50%;
-    opacity: 0.4;
+    border-radius: 12px;
+    opacity: 0.3;
     z-index: 0;
 }
 
@@ -36,29 +35,30 @@
 
 .resource-block:hover {
     border-color: var(--purple);
-    box-shadow: 8px 12px 0 rgba(139, 92, 246, 0.2);
-    transform: rotate(0deg) scale(1.01);
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.08);
+    transform: translateY(-4px);
 }
 
 .resource-block h3 {
-    font-size: 1.3rem;
-    font-weight: 900;
-    margin-bottom: 20px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 16px;
     color: var(--text-main);
+    letter-spacing: -0.01em;
 }
 
 .resource-block ul {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .resource-block li {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     color: var(--text-muted);
     line-height: 1.5;
-    padding-left: 24px;
+    padding-left: 20px;
     position: relative;
 }
 
@@ -67,23 +67,8 @@
     position: absolute;
     left: 0;
     color: var(--lime);
-    font-weight: 900;
+    font-weight: 700;
 }
-
-@keyframes slideInRotate {
-    from {
-        opacity: 0;
-        transform: translateX(-30px) rotate(-5deg);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0) rotate(0deg);
-    }
-}
-
-.resource-block:nth-child(1) { animation-delay: 0s; }
-.resource-block:nth-child(2) { animation-delay: 0.1s; }
-.resource-block:nth-child(3) { animation-delay: 0.2s; }
 
 @media (max-width: 1024px) {
     .resources-grid {

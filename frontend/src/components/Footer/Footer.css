@@ -1,10 +1,9 @@
 /* FOOTER STYLE */
 .footer {
-    background: white;
-    border-top: 4px solid var(--text-main);
-    padding: 60px 0;
+    background: #FFFFFF;
+    border-top: 1px solid var(--border-color);
+    padding: 40px 0;
     margin-top: auto;
-    box-shadow: 0 -4px 0 rgba(0, 0, 0, 0.02);
 }
 
 .footer-inner {
@@ -12,7 +11,7 @@
     justify-content: space-between;
     align-items: center;
     color: var(--text-muted);
-    font-size: 1.1rem;
+    font-size: 0.95rem;
 }
 
 .footer-links {
@@ -23,11 +22,11 @@
 .footer-links a {
     color: var(--text-muted);
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 500;
     transition: var(--transition);
-    position: relative;
 }
 
 .footer-links a:hover {
-    color: var(--purple);
+    color: var(--purple-hover);
 }
+
