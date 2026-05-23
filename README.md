@@ -2,29 +2,62 @@
 Приложение, которое помогает выбрать ИТ-профессию и построить план действий на 12 месяцев. 
 <br>
 
-## Структура проекта бекэнд части
+## Структура проекта
 ```
-backend/
-├── node_modules/         # Скачанные библиотеки 
-├── config/
-│   └── supabase.js       # Настройка и инициализация клиента Supabase
-├── routes/               # Эндпоинты (ручки), разбитые по фронтенду
-├── node_modules/         # Скачанные библиотеки (создаются сами)
-├── config/
-│   └── supabase.js       # Настройка и инициализация клиента Supabase
-├── routes/               # Эндпоинты (ручки), разбитые по вкладкам твоего дизайна
-│   ├── auth.js           # Вход в личный кабинет (регистрация/логин)
-│   ├── professions.js    # Вкладка «Профессии» (карточки и дорожные карты)
-│   ├── quiz.js           # Вкладка «Тест» (вопросы, отправка ответов, скоринг)
-│   └── assistant.js      # Вкладка «Умный помощник» (чат с нейронкой)
-├── services/             # Логика приложения
-│   ├── scoring.js        # Алгоритм расчета профессий по весам
-│   └── openai.js         # Логика общения с нейросетью
-├── .env               
-├── services/             # Тяжелая логика (чтобы не захламлять роуты)
-│   ├── scoring.js        # Алгоритм расчета профессий по весам
-│   └── neuron.js         # Логика общения с нейросетью
-├── .env                  # Секретные ключи (SUPABASE_KEY, AI_KEY) - не заливается в Git
-├── package.json          # Настройки проекта и список библиотек
-└── server.js             # Главная точка входа (запуск сервера)
+career-compass/
+├── package.json                        # корневой (запуск всего проекта)
+│
+├── backend/
+│   ├── server.js                       # точка входа, Express + подключение роутов
+│   ├── package.json
+│   ├── config/
+│   │   └── supabase.js                 # клиент Supabase (читает .env)
+│   ├── routes/
+│   │   ├── auth.js                     # POST /api/auth/register, /login, PATCH /profession
+│   │   ├── quiz.js                     # GET /api/quiz/questions, POST /submit, GET /results/:userId
+│   │   ├── progress.js                 # GET /api/progress/:userId, POST /toggle
+│   │   ├── professions.js              # GET /api/professions
+│   │   └── assistant.js               # POST /api/assistant/chat
+│   └── services/
+│       └── scoring.js                  # подсчёт результатов квиза → [{ profession, percentage }]
+│
+└── frontend/
+    ├── index.html
+    ├── vite.config.js
+    ├── package.json
+    └── src/
+        ├── App.jsx                     # роутинг всего приложения (React Router)
+        ├── main.jsx                    # точка входа React
+        ├── styles/
+        │   └── index.css              # глобальные CSS-переменные и базовые стили
+        ├── data/
+        │   ├── professionsData.js      # локальные данные о профессиях (иконки, цвета)
+        │   └── roadmapData.js          # данные для интерактивного roadmap по профессиям
+        ├── components/
+        │   ├── Header/                 # шапка сайта с навигацией
+        │   └── Footer/                 # подвал
+        └── pages/
+            ├── main/                   # главная страница /
+            │   └── components/
+            │       ├── HeroSection/
+            │       ├── HowItWorksSection/
+            │       └── ServicesSection/
+            ├── professions/            # список профессий /professions
+            │   └── components/
+            │       ├── ProfessionCard/
+            │       └── ProfessionsHeader/
+            ├── profession-detail/      # детальная страница профессии /profession/:slug
+            │   └── components/
+            │       ├── ProfessionAbout/
+            │       ├── ProfessionCareerPath/
+            │       ├── ProfessionFirstSteps/
+            │       ├── ProfessionHero/
+            │       ├── ProfessionRequirements/
+            │       ├── ProfessionResources/
+            │       └── ProfessionSkills/
+            ├── roadmap/                # интерактивный roadmap /roadmap/:slug
+            ├── dashboard/              # личный кабинет /dashboard
+            ├── login/                  # вход /login
+            ├── register/               # регистрация /register
+            └── chat/                   # ИИ-помощник /chat
 ```
