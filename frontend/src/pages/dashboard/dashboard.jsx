@@ -121,9 +121,13 @@ function Dashboard({ user, onLogout }) {
       .then(r => r.json())
       .then(data => {
         if (data.progress) {
-          const ids = new Set(
-            data.progress.filter(p => p.is_completed).map(p => p.task_id)
-          );
+          // Новый формат: массив [{ month_number, tasks: { "m1_0": true, ... } }]
+          const ids = new Set();
+          data.progress.forEach(row => {
+            Object.entries(row.tasks || {}).forEach(([taskId, done]) => {
+              if (done) ids.add(taskId);
+            });
+          });
           setCompletedTasks(ids);
         }
       })

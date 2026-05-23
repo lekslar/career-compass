@@ -1,8 +1,9 @@
+// backend/routes/progress.js
 const express = require('express');
 const router = express.Router();
 const supabase = require('../config/supabase');
 
-// 1. GET /api/progress/:userId — Получить весь прогресс пользователя
+// GET /api/progress/:userId
 router.get('/:userId', async (req, res) => {
     try {
         const { userId } = req.params;
@@ -14,58 +15,72 @@ router.get('/:userId', async (req, res) => {
 
         if (error) return res.status(500).json({ error: error.message });
 
-        res.json({
-            status: "success",
-            progress: data // вернет массив месяцев, внутри каждого объект { task_id: true/false }
-        });
+        res.json({ status: 'success', progress: data || [] });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Ошибка сервера при получении прогресса" });
+        res.status(500).json({ error: 'Ошибка сервера при получении прогресса' });
     }
 });
 
-// 2. POST /api/progress/toggle — Переключение конкретной задачи внутри месяца
+// POST /api/progress/toggle
+// Поддерживает два режима:
+//   1. Чекбоксы dashboard: { userId, monthNumber, taskId, isCompleted: true/false }
+//   2. Статусы roadmap:    { userId, monthNumber, taskId, status: 'completed'|'learning'|'not_started' }
 router.post('/toggle', async (req, res) => {
     try {
-        const { userId, monthNumber, taskId, isCompleted } = req.body;
+        const { userId, monthNumber, taskId, isCompleted, status } = req.body;
 
-        if (!userId || !monthNumber || !taskId) {
-            return res.status(400).json({ error: "Переданы не все обязательные поля" });
+        if (!userId || monthNumber === undefined || monthNumber === null || !taskId) {
+            return res.status(400).json({ error: 'Переданы не все обязательные поля' });
         }
 
-        // Подготавливаем JSON-кусочек для обновления (например: {"internet-how": true})
-        const taskUpdate = JSON.stringify({ [taskId]: isCompleted });
+        // Определяем значение для сохранения:
+        // - если передан status ('completed'|'learning'|'not_started') — сохраняем строку
+        // - если передан isCompleted (boolean) — сохраняем boolean (для чекбоксов dashboard)
+        let valueToStore;
+        if (status !== undefined) {
+            valueToStore = status; // 'completed', 'learning', 'not_started'
+        } else {
+            valueToStore = isCompleted; // true / false
+        }
 
-        // Делаем надстройку через rpc (удаленный вызов) или чистый upsert слияния JSON.
-        // Используем встроенный синтаксис Supabase для обновления jsonb данных:
-        const { data: existingRow } = await supabase
+        // Читаем текущий tasks
+        const { data: existing, error: fetchError } = await supabase
             .from('user_tasks_progress')
             .select('tasks')
             .eq('user_id', userId)
             .eq('month_number', monthNumber)
-            .single();
+            .maybeSingle();
 
-        let currentTasks = existingRow ? existingRow.tasks : {};
-        
-        // Меняем или добавляем статус конкретной задачи
-        currentTasks[taskId] = isCompleted;
+        if (fetchError) return res.status(500).json({ error: fetchError.message });
 
-        // Сохраняем обратно через upsert, опираясь на уникальный ключ unique_user_month
-        const { error } = await supabase
+        const currentTasks = existing?.tasks || {};
+
+        // Если статус 'not_started' — удаляем ключ из объекта (не хранить мусор)
+        if (valueToStore === 'not_started' || valueToStore === false) {
+            delete currentTasks[taskId];
+        } else {
+            currentTasks[taskId] = valueToStore;
+        }
+
+        const { error: upsertError } = await supabase
             .from('user_tasks_progress')
-            .upsert({
-                user_id: userId,
-                month_number: monthNumber,
-                tasks: currentTasks,
-                updated_at: new Date()
-            }, { onConflict: 'user_id, month_number' });
+            .upsert(
+                {
+                    user_id: userId,
+                    month_number: monthNumber,
+                    tasks: currentTasks,
+                    updated_at: new Date().toISOString(),
+                },
+                { onConflict: 'user_id,month_number' }
+            );
 
-        if (error) return res.status(500).json({ error: error.message });
+        if (upsertError) return res.status(500).json({ error: upsertError.message });
 
-        res.json({ status: "success", message: "Статус задачи в JSONB обновлен" });
+        res.json({ status: 'success' });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: "Ошибка сервера при обновлении прогресса" });
+        res.status(500).json({ error: 'Ошибка сервера при обновлении прогресса' });
     }
 });
 
