@@ -70,7 +70,7 @@ career-compass/
 `git clone https://github.com/lekslar/career-compass`
 `cd career-compass`
 
----
+-----
 Установка зависимостей
 `npm run install:all`
 
