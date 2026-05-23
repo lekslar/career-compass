@@ -70,7 +70,6 @@ career-compass/
 `git clone https://github.com/lekslar/career-compass`
 `cd career-compass`
 
------
 Установка зависимостей
 `npm run install:all`
 
@@ -78,6 +77,6 @@ career-compass/
 
 Запуск всего проекта происходит командой `npm run dev`
 
-После этого проект будет доступен по следующим ссылкам:
-Фронтенд — http://localhost:5173
+После этого проект будет доступен по следующим ссылкам: <br>
+Фронтенд — http://localhost:5173 <br>
 Бэкенд — http://localhost:8000
