@@ -23,7 +23,7 @@ function RoadmapPage() {
     }
   };
 
-  // Загружаем прогресс — из БД если авторизован, иначе из localStorage
+  // Загрузка прогресса с адаптацией под JSONB
   useEffect(() => {
     if (!slug) return;
     setSelectedTopic(null);
@@ -34,19 +34,26 @@ function RoadmapPage() {
       fetch(`/api/progress/${userId}`)
         .then(r => r.json())
         .then(data => {
-          if (data.progress) {
-            // В roadmap.jsx статусы: 'completed', 'learning', 'not_started'
-            // В БД храним task_id = topicId, is_completed = true/false
-            // Для 'learning' используем отдельный ключ с суффиксом _learning
+          if (data.status === 'success' && data.progress) {
             const map = {};
-            data.progress.forEach(p => {
-              if (p.task_id.endsWith('_learning')) {
-                const realId = p.task_id.replace('_learning', '');
-                if (p.is_completed) map[realId] = 'learning';
-              } else {
-                if (p.is_completed) map[p.task_id] = 'completed';
+            
+            // Проходим по строкам-месяцам из таблицы user_tasks_progress
+            data.progress.forEach(row => {
+              // row.tasks — это объект JSONB вида: { "topicId": true, "topicId_learning": true }
+              if (row.tasks) {
+                Object.entries(row.tasks).forEach(([taskId, isCompleted]) => {
+                  if (isCompleted) {
+                    if (taskId.endsWith('_learning')) {
+                      const realId = taskId.replace('_learning', '');
+                      map[realId] = 'learning';
+                    } else {
+                      map[taskId] = 'completed';
+                    }
+                  }
+                });
               }
             });
+            
             setStatusMap(map);
           }
         })
@@ -96,6 +103,7 @@ function RoadmapPage() {
   const learningTopics = allTopics.filter(t => statusMap[t.id] === 'learning').length;
   const progressPercent = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
 
+  // Обновление статуса в БД через атомарные и чистые вызовы JSONB бэкенда
   const updateTopicStatus = async (topicId, status) => {
     const updated = { ...statusMap, [topicId]: status };
     setStatusMap(updated);
@@ -103,39 +111,33 @@ function RoadmapPage() {
     const userId = getUserId();
 
     if (userId) {
-      // Сохраняем в БД
-      // 'completed' → task_id = topicId, is_completed = true
-      // 'learning'  → task_id = topicId_learning, is_completed = true
-      // 'not_started' → удаляем оба
       try {
         if (status === 'completed') {
-          // Удаляем 'learning' запись если была
+          // Выключаем статус обучения и включаем выполнение
           await fetch('/api/progress/toggle', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userId, monthNumber: 1, taskId: `${topicId}_learning`, isCompleted: false }),
           });
-          // Ставим completed
           await fetch('/api/progress/toggle', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userId, monthNumber: 1, taskId: topicId, isCompleted: true }),
           });
         } else if (status === 'learning') {
-          // Удаляем 'completed' запись если была
+          // Выключаем выполнение и включаем статус обучения
           await fetch('/api/progress/toggle', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userId, monthNumber: 1, taskId: topicId, isCompleted: false }),
           });
-          // Ставим learning
           await fetch('/api/progress/toggle', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userId, monthNumber: 1, taskId: `${topicId}_learning`, isCompleted: true }),
           });
         } else {
-          // not_started — удаляем оба
+          // status === 'not_started' — выключаем оба флага в JSONБ
           await fetch('/api/progress/toggle', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
