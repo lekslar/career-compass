@@ -73,8 +73,8 @@ cp .env.example .env   # если есть пример
 
 ## Ключевые моменты проекта
 
-База данных: Supabase (PostgreSQL)
-Frontend: React + Vite + React Router v6
-Backend: Express.js
-Стили: Чистый CSS (без Tailwind)
-Авторизация: Supabase Auth
+База данных: Supabase (PostgreSQL) <br>
+Frontend: React + Vite + React Router v6 <br>
+Backend: Express.js <br>
+Стили: Чистый CSS (без Tailwind) <br>
+Авторизация: Supabase Auth <br>
