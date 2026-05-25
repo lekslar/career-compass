@@ -6,77 +6,78 @@
 ## Структура проекта
 ```
 career-compass/
-├── package.json                        # корневой (запуск всего проекта)
+├── package.json                  # Корневой (concurrently — запуск фронта + бэка)
+├── README.md
 │
 ├── backend/
-│   ├── server.js                       # точка входа, Express + подключение роутов
+│   ├── server.js                 # Точка входа Express
 │   ├── package.json
+│   ├── .env
 │   ├── config/
-│   │   └── supabase.js                 # клиент Supabase (читает .env)
+│   │   └── supabase.js
 │   ├── routes/
-│   │   ├── auth.js                     # POST /api/auth/register, /login, PATCH /profession
-│   │   ├── quiz.js                     # GET /api/quiz/questions, POST /submit, GET /results/:userId
-│   │   ├── progress.js                 # GET /api/progress/:userId, POST /toggle
-│   │   ├── professions.js              # GET /api/professions
-│   │   └── assistant.js               # POST /api/assistant/chat
+│   │   ├── auth.js
+│   │   ├── progress.js
+│   │   ├── quiz.js
+│   │   ├── professions.js
+│   │   └── assistant.js
 │   └── services/
-│       └── scoring.js                  # подсчёт результатов квиза → [{ profession, percentage }]
+│       └── scoring.js
 │
 └── frontend/
-    ├── index.html
-    ├── vite.config.js
     ├── package.json
+    ├── vite.config.js
+    ├── index.html
     └── src/
-        ├── App.jsx                     # роутинг всего приложения (React Router)
-        ├── main.jsx                    # точка входа React
+        ├── main.jsx
+        ├── App.jsx                     # Основной роутинг
         ├── styles/
-        │   └── index.css              # глобальные CSS-переменные и базовые стили
+        │   └── index.css
         ├── data/
-        │   ├── professionsData.js      # локальные данные о профессиях (иконки, цвета)
-        │   └── roadmapData.js          # данные для интерактивного roadmap по профессиям
+        │   ├── professionsData.js
+        │   └── roadmapData.js
         ├── components/
-        │   ├── Header/                 # шапка сайта с навигацией
-        │   └── Footer/                 # подвал
+        │   ├── Header/
+        │   └── Footer/
         └── pages/
-            ├── main/                   # главная страница /
-            │   └── components/
-            │       ├── HeroSection/
-            │       ├── HowItWorksSection/
-            │       └── ServicesSection/
-            ├── professions/            # список профессий /professions
-            │   └── components/
-            │       ├── ProfessionCard/
-            │       └── ProfessionsHeader/
-            ├── profession-detail/      # детальная страница профессии /profession/:slug
-            │   └── components/
-            │       ├── ProfessionAbout/
-            │       ├── ProfessionCareerPath/
-            │       ├── ProfessionFirstSteps/
-            │       ├── ProfessionHero/
-            │       ├── ProfessionRequirements/
-            │       ├── ProfessionResources/
-            │       └── ProfessionSkills/
-            ├── roadmap/                # интерактивный roadmap /roadmap/:slug
-            ├── dashboard/              # личный кабинет /dashboard
-            ├── login/                  # вход /login
-            ├── register/               # регистрация /register
-            └── chat/                   # ИИ-помощник /chat
+            ├── main/
+            ├── professions/
+            ├── profession-detail/
+            ├── roadmap/
+            ├── dashboard/
+            ├── quiz/
+            ├── login/
+            ├── register/
+            └── chat/
 ```
 <br>
 
 ## Работа с проектом
 
-Клонирование репозитория
-`git clone https://github.com/lekslar/career-compass`
-`cd career-compass`
+# 1. Клонируем репозиторий
+git clone <ссылка-на-репозиторий>
+cd career-compass
 
-Установка зависимостей
-`npm run install:all`
+# 2. Устанавливаем зависимости
+npm install
 
-После этого необходимо получить файл .env с необходимыми ключами для взаимодействия с БД
+# 3. Переходим в backend и устанавливаем его зависимости
+cd backend
+npm install
+cd ..
 
-Запуск всего проекта происходит командой `npm run dev`
+# 4. Настраиваем .env (backend)
+cd backend
+cp .env.example .env   # если есть пример
+# Открой .env и заполни:
+# SUPABASE_URL=...
+# SUPABASE_ANON_KEY=...
+# SUPABASE_SERVICE_KEY=...
 
-После этого проект будет доступен по следующим ссылкам: <br>
-Фронтенд — http://localhost:5173 <br>
-Бэкенд — http://localhost:8000
+## Ключевые моменты проекта
+
+База данных: Supabase (PostgreSQL)
+Frontend: React + Vite + React Router v6
+Backend: Express.js
+Стили: Чистый CSS (без Tailwind)
+Авторизация: Supabase Auth
