@@ -28,8 +28,8 @@ function ProfessionDetailPage() {
   }
 
   return (
-    <section className="view active">
-      <button 
+    <section className="view active" style={{ paddingTop: '40px' }}>
+      <button
         className="back-button"
         onClick={() => navigate('/professions')}
       >
@@ -45,10 +45,10 @@ function ProfessionDetailPage() {
       <ProfessionFirstSteps profession={profession} />
       <ProfessionResources profession={profession} />
 
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '60px' }}>
-        <button 
-          className="btn-primary" 
-          style={{ padding: '12px 28px', fontSize: '1.05rem', gap: '8px' }}
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '60px 0 80px' }}>
+        <button
+          className="btn-primary"
+          style={{ padding: '14px 36px', fontSize: '1.05rem', gap: '10px' }}
           onClick={() => navigate(`/roadmap/${profession.slug}`)}
         >
           Перейти к Roadmap

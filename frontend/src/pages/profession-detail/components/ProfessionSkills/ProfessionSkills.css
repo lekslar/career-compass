@@ -1,18 +1,18 @@
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
 }
 
 .skill-card {
     background: white;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    padding: 28px;
+    padding: 24px;
     transition: var(--transition);
     position: relative;
     overflow: hidden;
-    animation: floatUp 0.6s ease-out;
+    animation: floatUp 0.6s ease-out both;
 }
 
 .skill-card::before {
@@ -46,22 +46,26 @@
 .skill-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
+    flex-wrap: wrap;
 }
 
 .skill-header h4 {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
     font-weight: 800;
     color: var(--text-main);
+    flex: 1;
+    min-width: 0;
 }
 
 .skill-level {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     font-weight: 700;
-    padding: 6px 12px;
+    padding: 4px 10px;
     border-radius: var(--radius-full);
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .skill-level.essential {
@@ -75,25 +79,20 @@
 }
 
 @keyframes floatUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.skill-card:nth-child(1) { animation-delay: 0.1s; }
-.skill-card:nth-child(2) { animation-delay: 0.2s; }
-.skill-card:nth-child(3) { animation-delay: 0.3s; }
-.skill-card:nth-child(4) { animation-delay: 0.4s; }
-.skill-card:nth-child(5) { animation-delay: 0.5s; }
-.skill-card:nth-child(6) { animation-delay: 0.6s; }
+.skill-card:nth-child(1) { animation-delay: 0.05s; }
+.skill-card:nth-child(2) { animation-delay: 0.1s; }
+.skill-card:nth-child(3) { animation-delay: 0.15s; }
+.skill-card:nth-child(4) { animation-delay: 0.2s; }
+.skill-card:nth-child(5) { animation-delay: 0.25s; }
+.skill-card:nth-child(6) { animation-delay: 0.3s; }
 
-@media (max-width: 1024px) {
+@media (max-width: 768px) {
     .skills-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 14px;
     }
 }

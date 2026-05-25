@@ -7,119 +7,6 @@ import {
 } from 'lucide-react';
 import './quiz.css';
 
-const FALLBACK_QUESTIONS = [
-  {
-    id: 1,
-    question_text: "Что тебя больше всего привлекает в разработке?",
-    options: [
-      { id: "a", text: "Создавать красивые интерфейсы, которые люди видят и используют" },
-      { id: "b", text: "Строить надёжные системы, которые работают «под капотом»" },
-      { id: "c", text: "Находить ошибки и убеждаться, что всё работает правильно" },
-      { id: "d", text: "Разрабатывать приложения для смартфонов" },
-      { id: "e", text: "Проектировать общую концепцию продукта и руководить процессом его создания" }
-    ]
-  },
-  {
-    id: 2,
-    question_text: "Какой тип задач тебе нравится больше?",
-    options: [
-      { id: "a", text: "Вёрстка, анимации, адаптивный дизайн" },
-      { id: "b", text: "Базы данных, API, бизнес-логика" },
-      { id: "c", text: "Тест-кейсы, автотесты, поиск багов" },
-      { id: "d", text: "Мобильные экраны, жесты, уведомления" },
-      { id: "e", text: "Координация задач, планирование релизов и общение с командой" }
-    ]
-  },
-  {
-    id: 3,
-    question_text: "Что из этого ты бы изучал с удовольствием?",
-    options: [
-      { id: "a", text: "React, CSS, Figma" },
-      { id: "b", text: "Node.js, PostgreSQL, Docker" },
-      { id: "c", text: "Selenium, Postman, нагрузочное тестирование" },
-      { id: "d", text: "Kotlin, Android Studio, Material Design" },
-      { id: "e", text: "Управление проектами и процессами (Agile, Scrum, Kanban)" }
-    ]
-  },
-  {
-    id: 4,
-    question_text: "Как ты относишься к работе с визуальной частью продукта?",
-    options: [
-      { id: "a", text: "Обожаю — хочу чтобы всё выглядело идеально" },
-      { id: "b", text: "Не особо, мне интереснее логика и данные" },
-      { id: "c", text: "Мне важно проверить, что визуал работает без багов" },
-      { id: "d", text: "Интересно, но в контексте мобильного приложения" },
-      { id: "e", text: "Мне важно проектировать пользовательский опыт (UX) целиком, а не только визуальный стиль" }
-    ]
-  },
-  {
-    id: 5,
-    question_text: "Что тебя раздражает больше всего?",
-    options: [
-      { id: "a", text: "Когда сайт выглядит некрасиво или неудобно" },
-      { id: "b", text: "Когда сервер падает или данные теряются" },
-      { id: "c", text: "Когда баги уходят в продакшн незамеченными" },
-      { id: "d", text: "Когда приложение тормозит или вылетает на телефоне" },
-      { id: "e", text: "Когда в команде царит хаос и нет четкого плана задач" }
-    ]
-  },
-  {
-    id: 6,
-    question_text: "Выбери технологию, которую хочется изучить первой:",
-    options: [
-      { id: "a", text: "TypeScript + React" },
-      { id: "b", text: "Express.js + PostgreSQL" },
-      { id: "c", text: "Cypress или Playwright для автотестов" },
-      { id: "d", text: "Kotlin + Jetpack Compose" },
-      { id: "e", text: "Инструменты планирования (Jira) и основы командного взаимодействия" }
-    ]
-  },
-  {
-    id: 7,
-    question_text: "Как ты относишься к командной работе?",
-    options: [
-      { id: "a", text: "Люблю показывать результат — дизайнерам и пользователям" },
-      { id: "b", text: "Предпочитаю работать автономно над сложными задачами" },
-      { id: "c", text: "Хочу быть тем, кто помогает всей команде выпускать без ошибок" },
-      { id: "d", text: "Интересно работать с командой над мобильным продуктом" },
-      { id: "e", text: "Мне нравится организовывать совместную работу и помогать команде общаться" }
-    ]
-  },
-  {
-    id: 8,
-    question_text: "Какой результат работы тебя мотивирует?",
-    options: [
-      { id: "a", text: "Видеть свой интерфейс в браузере — красиво и удобно" },
-      { id: "b", text: "Система обрабатывает тысячи запросов без сбоев" },
-      { id: "c", text: "Отчёт с нулём критических багов перед релизом" },
-      { id: "d", text: "Приложение в Play Market со звёздами и отзывами" },
-      { id: "e", text: "Успешный релиз полезного продукта в срок при слаженной работе команды" }
-    ]
-  },
-  {
-    id: 9,
-    question_text: "Какой стиль работы тебе ближе?",
-    options: [
-      { id: "a", text: "Итерации дизайна, быстрые правки, постоянный визуальный фидбэк" },
-      { id: "b", text: "Планирование архитектуры, написание надёжного кода" },
-      { id: "c", text: "Написание тест-планов, скрупулёзная проверка" },
-      { id: "d", text: "Разработка под конкретную платформу с её ограничениями" },
-      { id: "e", text: "Смешанный стиль: переключение между планированием задач, кодом и общением" }
-    ]
-  },
-  {
-    id: 10,
-    question_text: "Какая зарплатная перспектива тебя привлекает больше?",
-    options: [
-      { id: "a", text: "Frontend — быстрый старт, много вакансий" },
-      { id: "b", text: "Backend — выше средняя зарплата, высокий спрос" },
-      { id: "c", text: "QA — стабильный вход, всегда нужны в командах" },
-      { id: "d", text: "Android — узкая ниша, но хорошо оплачивается" },
-      { id: "e", text: "Максимальная универсальность (Fullstack) или управление проектами (Manager)" }
-    ]
-  }
-];
-
 const PROFESSION_META = {
   frontend: {
     title: 'Frontend-разработчик',
@@ -171,6 +58,7 @@ function QuizPage({ user, onUserUpdate }) {
   });
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(null);
   const [currentIdx, setCurrentIdx] = useState(() => {
     const saved = localStorage.getItem('last_quiz_current_idx');
     return saved ? parseInt(saved, 10) : 0;
@@ -190,21 +78,22 @@ function QuizPage({ user, onUserUpdate }) {
   // 1. Загрузка вопросов из базы данных
   useEffect(() => {
     setLoading(true);
+    setLoadError(null);
     fetch('/api/quiz/questions')
       .then(res => {
-        if (!res.ok) throw new Error('API Error');
+        if (!res.ok) throw new Error('Ошибка сервера');
         return res.json();
       })
       .then(data => {
         if (Array.isArray(data) && data.length > 0) {
           setQuestions(data);
         } else {
-          setQuestions(FALLBACK_QUESTIONS);
+          setLoadError('Вопросы теста не найдены. Убедись, что SQL-скрипт был запущен в Supabase.');
         }
       })
       .catch(err => {
-        console.warn('Backend API quiz/questions is offline, using fallback questions:', err.message);
-        setQuestions(FALLBACK_QUESTIONS);
+        console.error('Ошибка загрузки вопросов:', err.message);
+        setLoadError('Не удалось загрузить вопросы теста. Проверь подключение к серверу.');
       })
       .finally(() => {
         setLoading(false);
@@ -242,6 +131,17 @@ function QuizPage({ user, onUserUpdate }) {
     setSubmitMessage(LOADING_STATUSES[0]);
   };
 
+  // Вспомогательная функция сброса прогресса при смене профессии
+  const resetProgressIfProfessionChanged = async (newProfession) => {
+    if (user && user.current_profession && user.current_profession !== newProfession) {
+      try {
+        await fetch(`/api/progress/reset/${user.id}`, { method: 'DELETE' });
+      } catch (e) {
+        console.warn('Не удалось сбросить прогресс:', e);
+      }
+    }
+  };
+
   // Переход к следующему вопросу или отправка
   const handleSelectOption = (optionId) => {
     const nextAnswers = [...answers];
@@ -257,104 +157,102 @@ function QuizPage({ user, onUserUpdate }) {
       setCurrentIdx(nextIdx);
       localStorage.setItem('last_quiz_current_idx', nextIdx.toString());
     } else {
-      // Это был последний вопрос. Запускаем симуляцию глубокого анализа, затем делаем POST
+      // Последний вопрос — запускаем анализ
       setSubmitting(true);
-      
+
       const submitPayload = {
         userId: user?.id || null,
         answers: nextAnswers
       };
 
-      setTimeout(() => {
-        fetch('/api/quiz/submit', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(submitPayload)
-        })
-          .then(res => {
-            if (!res.ok) throw new Error('Submit API error');
-            return res.json();
-          })
-          .then(data => {
-            localStorage.setItem('last_quiz_result', JSON.stringify(data));
-            
-            const recommendedProfession = data.recommended[0];
-            if (user && onUserUpdate) {
-              const updatedUser = { ...user, current_profession: recommendedProfession };
-              onUserUpdate(updatedUser);
-            } else if (!user) {
-              localStorage.setItem('anonymous_profession', recommendedProfession);
-              
-              const localHistory = localStorage.getItem('anonymous_test_history')
-                ? JSON.parse(localStorage.getItem('anonymous_test_history'))
-                : [];
-              localHistory.unshift({
-                id: 'local_' + Date.now(),
-                test_name: 'Общий тест на IT-профессию',
-                match_profession: recommendedProfession,
-                match_percentage: data.matchPercentage,
-                completed_at: new Date().toISOString()
-              });
-              localStorage.setItem('anonymous_test_history', JSON.stringify(localHistory));
-            }
-
-            setResult(data);
-            setSubmitting(false);
-          })
-          .catch(err => {
-            console.error('Submit API error, calculating locally:', err);
-            // Фолбэк локального скоринга на клиенте
-            const scores = { frontend: 0, backend: 0, qa: 0, android: 0 };
-            nextAnswers.forEach(ans => {
-              if (ans.optionId === 'a') scores.frontend += 5;
-              if (ans.optionId === 'b') scores.backend += 5;
-              if (ans.optionId === 'c') scores.qa += 5;
-              if (ans.optionId === 'd') scores.android += 5;
-              if (ans.optionId === 'e') {
-                scores.frontend += 2;
-                scores.backend += 2;
-                scores.qa += 2;
-                scores.android += 2;
-              }
-            });
-            const sorted = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
-            const topProfession = sorted[0];
-            const professionAnswerMap = { frontend: 'a', backend: 'b', qa: 'c', android: 'd' };
-            const targetOption = professionAnswerMap[topProfession];
-            const matchCount = nextAnswers.filter(a => a.optionId === targetOption || a.optionId === 'e').length;
-            const matchPercentage = Math.round((matchCount / nextAnswers.length) * 100);
-
-            const localResult = {
-              status: 'success',
-              recommended: sorted,
-              matchPercentage
-            };
-            
-            localStorage.setItem('last_quiz_result', JSON.stringify(localResult));
-
-            if (user && onUserUpdate) {
-              const updatedUser = { ...user, current_profession: topProfession };
-              onUserUpdate(updatedUser);
-            } else if (!user) {
-              localStorage.setItem('anonymous_profession', topProfession);
-              
-              const localHistory = localStorage.getItem('anonymous_test_history')
-                ? JSON.parse(localStorage.getItem('anonymous_test_history'))
-                : [];
-              localHistory.unshift({
-                id: 'local_' + Date.now(),
-                test_name: 'Общий тест на IT-профессию',
-                match_profession: topProfession,
-                match_percentage: matchPercentage,
-                completed_at: new Date().toISOString()
-              });
-              localStorage.setItem('anonymous_test_history', JSON.stringify(localHistory));
-            }
-
-            setResult(localResult);
-            setSubmitting(false);
+      // async IIFE внутри setTimeout чтобы использовать await
+      setTimeout(async () => {
+        try {
+          const res = await fetch('/api/quiz/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(submitPayload)
           });
-      }, 2000); // 2 секунды премиальной симуляции
+
+          if (!res.ok) throw new Error('Submit API error');
+          const data = await res.json();
+
+          localStorage.setItem('last_quiz_result', JSON.stringify(data));
+
+          const recommendedProfession = data.recommended[0];
+
+          if (user && onUserUpdate) {
+            await resetProgressIfProfessionChanged(recommendedProfession);
+            const updatedUser = { ...user, current_profession: recommendedProfession };
+            onUserUpdate(updatedUser);
+          } else if (!user) {
+            localStorage.setItem('anonymous_profession', recommendedProfession);
+            const localHistory = localStorage.getItem('anonymous_test_history')
+              ? JSON.parse(localStorage.getItem('anonymous_test_history'))
+              : [];
+            localHistory.unshift({
+              id: 'local_' + Date.now(),
+              test_name: 'Общий тест на IT-профессию',
+              match_profession: recommendedProfession,
+              match_percentage: data.matchPercentage,
+              completed_at: new Date().toISOString()
+            });
+            localStorage.setItem('anonymous_test_history', JSON.stringify(localHistory));
+          }
+
+          setResult(data);
+          setSubmitting(false);
+
+        } catch (err) {
+          console.error('Submit API error, calculating locally:', err);
+
+          // Фолбэк локального скоринга
+          const scores = { frontend: 0, backend: 0, qa: 0, android: 0 };
+          nextAnswers.forEach(ans => {
+            if (ans.optionId === 'a') scores.frontend += 5;
+            if (ans.optionId === 'b') scores.backend += 5;
+            if (ans.optionId === 'c') scores.qa += 5;
+            if (ans.optionId === 'd') scores.android += 5;
+            if (ans.optionId === 'e') {
+              scores.frontend += 2;
+              scores.backend += 2;
+              scores.qa += 2;
+              scores.android += 2;
+            }
+          });
+          const sorted = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
+          const topProfession = sorted[0];
+          const professionAnswerMap = { frontend: 'a', backend: 'b', qa: 'c', android: 'd' };
+          const targetOption = professionAnswerMap[topProfession];
+          const matchCount = nextAnswers.filter(a => a.optionId === targetOption || a.optionId === 'e').length;
+          const matchPercentage = Math.round((matchCount / nextAnswers.length) * 100);
+
+          const localResult = { status: 'success', recommended: sorted, matchPercentage };
+          localStorage.setItem('last_quiz_result', JSON.stringify(localResult));
+
+          if (user && onUserUpdate) {
+            await resetProgressIfProfessionChanged(topProfession);
+            const updatedUser = { ...user, current_profession: topProfession };
+            onUserUpdate(updatedUser);
+          } else if (!user) {
+            localStorage.setItem('anonymous_profession', topProfession);
+            const localHistory = localStorage.getItem('anonymous_test_history')
+              ? JSON.parse(localStorage.getItem('anonymous_test_history'))
+              : [];
+            localHistory.unshift({
+              id: 'local_' + Date.now(),
+              test_name: 'Общий тест на IT-профессию',
+              match_profession: topProfession,
+              match_percentage: matchPercentage,
+              completed_at: new Date().toISOString()
+            });
+            localStorage.setItem('anonymous_test_history', JSON.stringify(localHistory));
+          }
+
+          setResult(localResult);
+          setSubmitting(false);
+        }
+      }, 2000);
     }
   };
 
@@ -374,6 +272,33 @@ function QuizPage({ user, onUserUpdate }) {
         <div style={{ textAlign: 'center' }}>
           <div className="spinner" style={{ border: '4px solid var(--border-color)', borderTop: '4px solid var(--purple)', borderRadius: '50%', width: '48px', height: '48px', margin: '0 auto 20px' }}></div>
           <p style={{ fontWeight: 600, color: 'var(--text-muted)' }}>Загрузка вопросов теста...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Рендер 1b: ошибка загрузки
+  if (loadError) {
+    return (
+      <div className="quiz-wrapper view active" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+        <div style={{ textAlign: 'center', maxWidth: '480px', padding: '32px' }}>
+          <p style={{ fontSize: '2.5rem', marginBottom: '16px' }}>⚠️</p>
+          <h2 style={{ marginBottom: '12px', color: 'var(--text-main)' }}>Не удалось загрузить тест</h2>
+          <p style={{ color: 'var(--text-muted)', marginBottom: '24px', lineHeight: 1.6 }}>{loadError}</p>
+          <button className="btn-primary" onClick={() => {
+            setLoadError(null);
+            setLoading(true);
+            fetch('/api/quiz/questions')
+              .then(r => r.json())
+              .then(d => {
+                if (Array.isArray(d) && d.length > 0) setQuestions(d);
+                else setLoadError('Вопросы не найдены в базе данных.');
+              })
+              .catch(() => setLoadError('Сервер недоступен.'))
+              .finally(() => setLoading(false));
+          }}>
+            Попробовать снова
+          </button>
         </div>
       </div>
     );
@@ -415,7 +340,7 @@ function QuizPage({ user, onUserUpdate }) {
     );
   }
 
-  // Рендер 3: экран симуляции глубокого анализа
+  // Рендер 3: экран симуляции анализа
   if (submitting) {
     return (
       <section className="quiz-wrapper view active">
@@ -440,7 +365,6 @@ function QuizPage({ user, onUserUpdate }) {
     const matchPercentage = result.matchPercentage;
     const IconComponent = topProfession?.icon || Code;
 
-    // Рассчитаем баллы для всех направлений для красивого чарта на клиенте
     const calculatedScores = { frontend: 0, backend: 0, qa: 0, android: 0 };
     answers.forEach(ans => {
       if (ans.optionId === 'a') calculatedScores.frontend += 5;
@@ -455,7 +379,7 @@ function QuizPage({ user, onUserUpdate }) {
       }
     });
 
-    const maxScore = 50; // 10 вопросов * 5 баллов максимум
+    const maxScore = 50;
     const breakdown = [
       { slug: 'frontend', title: 'Frontend Developer', pct: Math.round((calculatedScores.frontend / maxScore) * 100), color: '#3b82f6' },
       { slug: 'backend', title: 'Backend Developer', pct: Math.round((calculatedScores.backend / maxScore) * 100), color: '#8b5cf6' },
@@ -546,7 +470,7 @@ function QuizPage({ user, onUserUpdate }) {
     );
   }
 
-  // Рендер 5: сам тест (прохождение вопросов)
+  // Рендер 5: прохождение вопросов
   const activeQuestion = questions[currentIdx];
   const progressPercent = Math.round((currentIdx / questions.length) * 100);
 

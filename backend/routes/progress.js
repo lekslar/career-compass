@@ -85,3 +85,26 @@ router.post('/toggle', async (req, res) => {
 });
 
 module.exports = router;
+
+// DELETE /api/progress/reset/:userId
+// Сбрасывает прогресс dashboard (месяца 1-12) при смене профессии.
+// Roadmap-прогресс (month_number = 0) не трогает.
+router.delete('/reset/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        const { error } = await supabase
+            .from('user_tasks_progress')
+            .delete()
+            .eq('user_id', userId)
+            .gte('month_number', 1)  // только месяцы 1-12
+            .lte('month_number', 12);
+
+        if (error) return res.status(500).json({ error: error.message });
+
+        res.json({ status: 'success', message: 'Прогресс dashboard сброшен' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Ошибка сервера при сбросе прогресса' });
+    }
+});

@@ -364,6 +364,9 @@ function Dashboard({ user, onLogout }) {
 
   // Загружаем прогресс
   useEffect(() => {
+    // Сразу сбрасываем стейт при смене профессии — не ждём ответа от сервера
+    setCompletedTasks(new Set());
+
     if (!user?.id) {
       const saved = localStorage.getItem(`dashboard_progress_anonymous_${activeProfession}`);
       if (saved) {
