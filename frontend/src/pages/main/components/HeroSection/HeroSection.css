@@ -181,3 +181,59 @@
     animation: float-gentle 6.5s ease-in-out infinite 1.5s;
 }
 
+/* Скрываем иллюстрацию с ноутбуком на мобильных */
+/* Полностью убираем правый блок с ноутбуком на мобильных */
+/* @media (max-width: 992px) {
+    .hero-section {
+        grid-template-columns: 1fr !important;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .hero-illustration {
+        display: none !important;
+    }
+    
+    .hero-text {
+        padding-right: 0;
+        max-width: 100%;
+    }
+    
+    .hero-title {
+        font-size: 2.6rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-section {
+        padding-bottom: 60px;
+    }
+    
+    .hero-title {
+        font-size: 2.3rem;
+    }
+} */
+
+/* Скрываем блок с ноутбуком на мобильных */
+@media (max-width: 992px) {
+    .hero-image-placeholder,
+    .hero-illustration,
+    .sketchy-illustration {
+        display: none !important;
+    }
+    
+    .hero-section {
+        grid-template-columns: 1fr !important;
+        text-align: center;
+    }
+    
+    .hero-text {
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-title {
+        font-size: 2.4rem;
+    }
+}
