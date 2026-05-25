@@ -60,7 +60,7 @@ git clone https://github.com/lekslar/career-compass
 cd career-compass
 ```
 ### 2. Устанавливаем зависимости
-`npm install`
+```npm install```
 
 ### 3. Переходим в backend и устанавливаем его зависимости
 ```
