@@ -30,7 +30,7 @@ function AppContent() {
   };
 
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header user={user} onLogout={handleLogout} />
 
       <main id="app-container">
@@ -50,7 +50,7 @@ function AppContent() {
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 }
 

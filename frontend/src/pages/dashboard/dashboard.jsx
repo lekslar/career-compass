@@ -353,6 +353,7 @@ function Dashboard({ user, onLogout }) {
   // Множество выполненных task_id (из БД)
   const [completedTasks, setCompletedTasks] = useState(new Set());
   const [progressLoading, setProgressLoading] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // История тестов
   const [testHistory, setTestHistory] = useState([]);
@@ -565,7 +566,7 @@ function Dashboard({ user, onLogout }) {
           </button>
         </aside>
 
-        <main className="dashboard-panel" style={{ paddingTop: '48px', paddingBottom: '48px' }}>
+        <main className="dashboard-panel">
 
           {/* ПРОГРЕСС */}
           {activeTab === 'progress' && (
