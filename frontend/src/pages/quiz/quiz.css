@@ -219,7 +219,7 @@
 }
 
 .result-badge-circle .label {
-    font-size: 0.8rem;
+    font-size: 0.55rem;
     font-weight: 800;
     color: var(--text-muted);
     text-transform: uppercase;
@@ -257,7 +257,7 @@
 }
 
 .result-description {
-    font-size: 1.15rem;
+    font-size: 0.77rem;
     color: var(--text-muted);
     line-height: 1.7;
     margin-bottom: 0;

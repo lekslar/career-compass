@@ -299,7 +299,7 @@ function ChatPage({ user }) {
       const errorMessage = {
         id: Date.now().toString(),
         sender: 'bot',
-        text: 'Произошла ошибка при получении ответа от ИИ-ассистента. Пожалуйста, убедитесь, что бэкенд запущен, и попробуйте еще раз. 🤖⚠️',
+        text: 'Произошла ошибка при получении ответа от ИИ-ассистента. Пожалуйста, обратитесь к администратору за помощью или попробуйте снова позже.',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       setMessages(prev => [...prev, errorMessage]);

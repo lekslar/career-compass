@@ -634,6 +634,12 @@ function Dashboard({ user, onLogout }) {
                   Открыть план развития
                 </button>
               </div>
+
+              {user && (
+                <button className="cta-logout-btn" onClick={() => { onLogout(); navigate('/'); }}>
+                  <LogOut size={16} /> Выйти из аккаунта
+                </button>
+              )}
             </div>
           )}
 
